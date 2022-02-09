@@ -1,21 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen';
+import { ImageBackground, StyleSheet, Text, View, Platform } from 'react-native';
+import TitleItem from './components/TitleComponents/TitleScreen';
+//import LoginScreen from "./components/TitleComponents/LoginScreen";
 
-const Stack = createNativeStackNavigator();
+{/*import * as firebase from '@react-native-firebase/app'
+
+
+const credentials = {
+  apiKey: "FIREBASE_API_KEY",
+
+  authDomain: "wheels-tracker-25085.firebaseapp.com",
+
+  projectId: "wheels-tracker-25085",
+
+  storageBucket: "wheels-tracker-25085.appspot.com",
+
+};
+
+await firebase.initializeApp(credentials);*/}
+
+
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+
+      <TitleItem />
+      {/*<LoginScreen />*/}
+
+      <StatusBar style="auto" />
+  </View>
   );
 }
 
