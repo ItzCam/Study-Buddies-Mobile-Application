@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native'
 
 const styles = StyleSheet.create({
     container: {
@@ -11,31 +11,35 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'space-between',
     },
-    title: {
-        textAlign: 'center',
-        fontSize: 32,
-        paddingTop: '15%',
-        flex: 1,
+    userProfileTitle: {
+        textAlign: "center",
+        fontSize: 30,
+        paddingTop: '10%',
+        flex: 1
     },
-    textInput: {
+    input: {
         height: 40,
-        borderWidth: 1,
-        padding: 10,
         margin: '2.5%',
-        marginBottom: '5%',
+        borderWidth: 1,
+        borderRadius: 20,
+        borderColor: 'black',
+        padding: 10,
+        //flex: 0.5
     },
     textInputView: {
-        //backgroundColor: 'green',
-        justifyContent: 'center',
-        flex: 9,
+        justifyContent: 'flex-end',
+        //marginBottom: '-10%',
+        //backgroundColor: 'lightgreen',
+        flex: 1
     },
     buttonView: {
         //backgroundColor: 'pink',
         flex: 1,
         justifyContent: 'flex-end',
     },
-    footer: {
-        textAlign: 'center',
-    },
+    signUpText: {
+        textAlign: 'center'
+    }
 });
+
 export default styles;
