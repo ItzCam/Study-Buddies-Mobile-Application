@@ -1,52 +1,37 @@
-import { useNavigation } from '@react-navigation/core'
-import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { auth } from '../firebase'
+import { useNavigation } from '@react-navigation/core';
+import React, { useEffect, useState, Component } from 'react';
+import { KeyboardAvoidingView, Content, StyleSheet, Text, TextInput, TouchableOpacity, View, Icon, Dimensions, ScrollView, ImageBackground, ListItem, Pressable, SafeAreaView} from 'react-native';
+import {FontAwesome5} from '@expo/vector-icons';
 
-const HomeScreen = () => {
-  const navigation = useNavigation()
-
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        navigation.replace("Login")
-      })
-      .catch(error => alert(error.message))
+export default class HomeScreen extends React.Component {
+  render(){
+    return (
+      <ImageBackground style = {{flex: 1}} source={{uri:'https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?size=626&ext=jpg'}}>
+        <View style = {styles.container}>
+          <SafeAreaView style = {{flex: 1}}>
+            <TouchableOpacity 
+              style = {{alignItems: "flex-end", margin: 16}}
+              onPress = {this.props.navigation.openDrawer}>
+                <FontAwesome5 name = "bars" size={24} color="#161924" />
+                <View style = {{flex: 1, alignItems: "center", justifyContent: "center"}}>
+                    <Text style = {styles.text}>{this.props.name} Screen</Text>
+                </View>
+              </TouchableOpacity>
+          </SafeAreaView>
+        </View>
+      </ImageBackground>
+      )
   }
-
-  return (
-    <View style={styles.container}>
-      <Text>Email: {auth.currentUser?.email}</Text>
-      <TouchableOpacity
-        onPress={handleSignOut}
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>Sign out</Text>
-      </TouchableOpacity>
-    </View>
-  )
 }
-
-export default HomeScreen
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
-   button: {
-    backgroundColor: '#0782F9',
-    width: '60%',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 40,
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: '700',
-    fontSize: 16,
+
+  text: {
+    color: "#161924",
+    fontSize: 20,
+    fontWeight: '500',
   },
 })

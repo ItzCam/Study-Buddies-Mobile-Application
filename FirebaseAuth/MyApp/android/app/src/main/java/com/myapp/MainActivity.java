@@ -1,7 +1,6 @@
-package com.androidsim;
+package com.myapp;
 
 import com.facebook.react.ReactActivity;
-import com.reactnativecommunity.checkbox.ReactCheckBoxPackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -11,13 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "androidsim";
-  }
-  @Override
-  protected List<ReactPackage> getPackages() {
-    return Arrays.asList(
-            new MainReactPackage(),
-            new ReactCheckBoxPackage()
-    );
+    return "MyApp";
   }
 }

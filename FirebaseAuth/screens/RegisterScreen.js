@@ -1,8 +1,11 @@
 //New file, screen for register screen
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState, Component } from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, Content, StyleSheet, Text, TextInput, TouchableOpacity, View, Icon, Dimensions, ScrollView, ImageBackground } from 'react-native';
 import { auth } from '../firebase'
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 const RegisterScreen = () => {
   const [firstName, setFirstName] = useState('')
@@ -15,7 +18,7 @@ const RegisterScreen = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        navigation.replace("Home")
+        navigation.replace("Confirm")
       }
     })
 
@@ -24,7 +27,7 @@ const RegisterScreen = () => {
 
   const handleSignUp = () => {
     auth
-      .createUserWithEmailAndPassword(firstName, lastName, email, password)
+      .createUserWithEmailAndPassword(email, password)
       .then(userCredentials => {
         const user = userCredentials.user;
         console.log('Registered with:', user.firstName, user.lastName);
@@ -33,54 +36,49 @@ const RegisterScreen = () => {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior="padding"
-    >
-      <View style={styles.inputContainer}>
+    <ImageBackground style = {{flex: 1}} source={{uri:'https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?size=626&ext=jpg'}}>
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior="padding"
+        >
+        <Text style={{ fontSize: scale(15) }}>Enter the neccessary information below:</Text>
+            <View style={styles.inputContainer}>
               <TextInput
-                placeholder="First Name"
-                value={email}
-                onChangeText={text => setFirstName(text)}
-                style={styles.input}
-      />
+              placeholder="First Name"
+              value={firstName}
+              onChangeText={text => setFirstName(text)}
+              style={styles.input}
+            />
               <TextInput
               placeholder="Last Name"
-              value={email}
-              nChangeText={text => setLastName(text)}
+              value={lastName}
+              onChangeText={text => setLastName(text)}
               style={styles.input}
-      />
-
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={text => setEmail(text)}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={text => setPassword(text)}
-          style={styles.input}
-          secureTextEntry
-        />
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={handleLogin}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Register")}
-          style={[styles.button, styles.buttonOutline]}
-        >
-          <Text style={styles.buttonOutlineText}>Register</Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
+            />
+              <TextInput
+              placeholder="Email"
+              value={email}
+              onChangeText={text => setEmail(text)}
+              style={styles.input}
+              />
+              <TextInput
+              placeholder="Password"
+              value={password}
+              onChangeText={text => setPassword(text)}
+              style={styles.input}
+              secureTextEntry
+              />
+            </View>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                onPress={handleSignUp}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>Create Account</Text>
+              </TouchableOpacity>
+            </View>
+      </KeyboardAvoidingView>
+    </ImageBackground>  
   )
 }
 
@@ -91,7 +89,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'green',
   },
   titleContainer: {
     fontSize : 30,
