@@ -3,6 +3,7 @@ import React, { useEffect, useState, Component } from 'react';
 import { KeyboardAvoidingView, Content, StyleSheet, Text, TextInput, TouchableOpacity, View, Icon, Dimensions, ScrollView, ImageBackground, ListItem, Pressable} from 'react-native';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import { auth } from '../firebase';
+import App from '../App';
 
 
 const LoginScreen = () => {
@@ -46,7 +47,7 @@ const LoginScreen = () => {
             <TouchableOpacity
               onPress={handleLogin}
               style={styles.button}
-              onPress={()=>navigation.replace("Home")}
+              onPress={()=>navigation.navigate("MyDrawer")}
             >
             <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>

@@ -1,5 +1,5 @@
 package com.androidsim;
-
+import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import com.reactnativecommunity.checkbox.ReactCheckBoxPackage;
 
@@ -20,4 +20,8 @@ public class MainActivity extends ReactActivity {
             new ReactCheckBoxPackage()
     );
   }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(null);
+}
 }

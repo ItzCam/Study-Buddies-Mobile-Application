@@ -23,7 +23,7 @@ const ConfirmScreen = () => {
           onPress={() => navigation.navigate("Home")}
           style={styles.button}
         >
-    <Text Text style={styles.buttonText}>Continue to home screen</Text>
+    <Text style={styles.buttonText}>Continue to home screen</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={handleSignOut}
