@@ -3,30 +3,37 @@ import {StyleSheet} from 'react-native'
 const styles = StyleSheet.create({
     titleContainer: {
         width: '100%',
-        height: '100%'
+        height: '100%',
     },
     titleView: {
-        marginTop: '10%',
-        width: '100%',
+        //paddingTop: '10%',
         alignItems: 'center',
-        flex: 1,
+        flex: 2,
+        justifyContent: 'center',
         //backgroundColor: 'green'
+        //backgroundColor: '#302f90',
     },
     title: {
-        fontSize: 40,
-        fontWeight: '500',
+        fontSize: 72,
+        fontWeight: 'bold',
+        fontStyle: 'italic',
         color: 'white',
         textAlign: 'center',
-        textAlignVertical: 'center',
-        //backgroundColor: 'red',
-        flex: 19
+        justifyContent: 'center',
+
+        //backgroundColor: '#a81d20',
+
     },
     subtitle: {
-        fontSize: 16,
+        fontSize: 20,
         color: 'white',
         fontWeight: 'bold',
-        //backgroundColor: 'blue',
+        fontStyle: "italic",
+        textAlign: 'center',
+    },
+    subtitleView: {
         flex: 1,
+        justifyContent: 'flex-end'
     },
     image: {
         width: '100%',
@@ -35,6 +42,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
     },
     buttonView: {
+        paddingHorizontal: '5%',
         paddingBottom: '5%',
     }
 });
