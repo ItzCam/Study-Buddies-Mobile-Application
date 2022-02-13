@@ -1,34 +1,34 @@
 import React from 'react';
-import {View, ScrollView, Text, TextInput, Pressable} from 'react-native';
 import styles from './styles';
+import {Image, View, ScrollView, Text, TextInput, Pressable, Alert} from 'react-native';
 import StyledButton from '../StyledButton';
+import {auth} from '../../../db/firestore';
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+
+//TODO: Dropdown menu for occupation: friendly visitor, driver, both
 
 const SignUpScreen = ({navigation}) => {
-    const [email, onChangeEmail] = React.useState();
-    const [password, onChangePassword] = React.useState();
-    const [confirmPassword, onChangeConfirmPassword] = React.useState();
-    let warning;
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [confirmPassword, setConfirmPassword] = React.useState('');
 
     function verifyInput() {
         let flag = true;
-        if (!String(email).includes('@') || !String(email).includes('.')) {
+        if (!email.includes('@') || !email.includes('.')) {
             console.warn('Email invalid!');
             flag = false;
         }
         if (password !== confirmPassword) {
             console.warn('Passwords don\'t match!');
-            warning = 'Passwords must match';
             flag = false;
         }
-        if (flag) {
-            navigation.navigate('Create Profile');
-        }
+        return flag;
     }
 
     function verifyEmail() {
         if (email === '' || email === undefined) {
             return;
-        } else if (!String(email).includes('@') || !String(email).includes('.')) {
+        } else if (!email.includes('@') || !email.includes('.')) {
             return 'Please input a valid email address.';
         }
     }
@@ -36,8 +36,8 @@ const SignUpScreen = ({navigation}) => {
     function verifyPassword() {
         if (password === '' || password === undefined) {
             return;
-        } else if (String(password).length < 8) {
-            return 'Must be at least 8 characters.';
+        } else if (password.length < 6) {
+            return 'Password must be at least 6 characters.';
         }
     }
 
@@ -50,55 +50,86 @@ const SignUpScreen = ({navigation}) => {
         }
     }
 
+    function registerUser() {
+        if (!verifyInput()) {
+            return;
+        }
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((result) => {
+                console.log(result)
+                console.log('User signed up successfully')
+
+                //navigation.goBack()
+                navigation.navigate("Create Profile")
+            })
+            .catch((error) => {
+                if (error.code === 'auth/email-already-in-use') {
+                    Alert.alert('Email in Use!', 'Email address is already in use!');
+                } else if (error.code === 'auth/invalid-email') {
+                    Alert.alert('Invalid Email!', 'Email address is invalid!');
+                } else if (error.code === 'auth/weak-password') {
+                    Alert.alert('Weak password!', 'Password is too weak!');
+                }
+            });
+    }
+
     return (
-        <ScrollView
+        <KeyboardAwareScrollView
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
+            <View style={styles.imageView}>
+                <Image
+                    source={require('../../../assets/images/csulbBanner.jpg')}
+                    style={styles.image}
+                />
+            </View>
+            <Text style={styles.title}>Create your Study Buddy account!</Text>
 
-            {/*<Text style={styles.title}>Sign Up</Text>*/}
             <View style={styles.textInputView}>
                 <Text style={styles.header}>Email Address</Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={onChangeEmail}
+                    onChangeText={setEmail}
                     placeholder="Email Address"
                     textContentType={'emailAddress'}
                     keyboard-type='email-address'
+                    autoCapitalize={'none'}
                 />
-                <Text>{verifyEmail()}</Text>
+                <Text style={styles.errorText}>{verifyEmail()}</Text>
                 <Text style={styles.header}>Create Password</Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={onChangePassword}
+                    onChangeText={setPassword}
                     placeholder="Password"
                     textContentType={'password'}
                     secureTextEntry={true}
                 />
-                <Text>{verifyPassword()}</Text>
+                <Text style={styles.errorText}>{verifyPassword()}</Text>
                 <Text style={styles.header}>Confirm Password</Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={onChangeConfirmPassword}
+                    onChangeText={setConfirmPassword}
                     placeholder="Confirm Password"
                     textContentType={'password'}
                     secureTextEntry={true}
                 />
-                <Text>{verifyConfirmPassword()}</Text>
+                <Text style={styles.errorText}>{verifyConfirmPassword()}</Text>
             </View>
-            <View style={styles.buttonView}>
+
+            <View style={styles.footerView}>
                 <StyledButton
                     style={styles.button}
                     text={'Continue'}
-                    onPress={verifyInput}
+                    onPress={registerUser}
+                    //onPress={() => navigation.replace('Create Profile')}
                 />
-                <Pressable onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.footer}>Already have an account? Login here</Text>
+                <Pressable onPress={() => navigation.replace('Login')}>
+                    <Text>Already have an account? Login here</Text>
                 </Pressable>
             </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
     );
-};
-
+}
 
 export default SignUpScreen;
