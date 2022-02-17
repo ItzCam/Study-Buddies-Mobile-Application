@@ -6,15 +6,16 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     button: {
-        backgroundColor: 'lightgreen',
+        backgroundColor: '#f6a827',
         height: 40,
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center'
     },
     text: {
-        fontSize: 13,
-        fontWeight: '500',
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: 'white',
         textTransform: 'uppercase',
     },
 });
