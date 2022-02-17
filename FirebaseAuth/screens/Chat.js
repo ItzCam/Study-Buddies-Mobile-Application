@@ -53,7 +53,7 @@ useEffect(() => {
 messages={messages}
 showAvatarForEveryMessage={true:
 onSend={messages = onSend(messages)}
-user ={ _id: auth?.currentUser?.email,
+user = { _id: auth?.currentUser?.email,
 name: auth?.currentUser?.displayName,
 avatar: auth?.currentUser?.photoURL
 }
