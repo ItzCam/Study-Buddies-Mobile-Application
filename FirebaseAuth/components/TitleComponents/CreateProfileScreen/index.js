@@ -179,17 +179,17 @@ const CreateProfileScreen = ({navigation}) => {
                         keyboardType='phone-pad'
                     />
 
-                    <Text>Role</Text>
+                    <Text>Major</Text>
                     <RNPickerSelect
                         style={styles}
                         onValueChange={setRole}
                         items={[
-                            {label: 'Driver', value: 'Driver'},
-                            {label: 'Friendly Visitor', value: 'Friendly Visitor'},
-                            {label: 'Driver & Friendly Visitor', value: 'Both'},
+                            {label: 'Computer Science', value: 'Computer Science'},
+                            {label: 'Computer Engineering', value: 'Computer Engineering'},
+                            {label: 'Aerospace Engineering', value: 'Aerospace Engineering'},
                         ]}
                         selectedValue={role}
-                        placeholder={{label: 'Select a role...'}}
+                        placeholder={{label: 'Select your major...'}}
                     />
                 </View>
 
