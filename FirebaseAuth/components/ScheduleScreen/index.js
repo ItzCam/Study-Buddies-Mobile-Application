@@ -8,7 +8,7 @@ import firebase from "firebase/app";
 
 let isAdmin;
 let userID, userName, userRole;
-let routesCollection = {};
+let locationsCollection = {};
 let scheduleCollection = {};
 let markedItems = {};
 
@@ -21,7 +21,7 @@ const ScheduleScreen = () => {
     async function getData() {
         isAdmin = await getIsAdmin();
         await getUserData();
-        await getRoutes();
+        await getlocations();
         await getschedule();
     }
 
@@ -32,12 +32,13 @@ const ScheduleScreen = () => {
         userRole = userData.data().role;
     }
 
-    async function getRoutes() {
-        routesCollection = {};
-        await db.collection('routes').get().then((snapshot) => {
+    // get location collections information
+    async function getlocations() {
+        locationsCollection = {};
+        await db.collection('locations').get().then((snapshot) => {
             snapshot.docs.map(doc => {
                 if (doc !== undefined) {
-                    routesCollection[doc.id] = doc.data();
+                    locationsCollection[doc.id] = doc.data();
                 }
             })
         })
@@ -109,7 +110,7 @@ const ScheduleScreen = () => {
     }
 
     function renderItem(shift) {
-        if (Object.keys(routesCollection).length === 0)
+        if (Object.keys(locationsCollection).length === 0)
             return;
 
         let futureDate = true;
@@ -151,7 +152,7 @@ const ScheduleScreen = () => {
             dropView = true;
         }
 
-        let routeInfo = routesCollection[shift.route];
+        let routeInfo = locationsCollection[shift.route];
 
             return (
             <View style={{
