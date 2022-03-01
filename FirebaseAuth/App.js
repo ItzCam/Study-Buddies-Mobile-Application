@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
+import { useNavigation } from '@react-navigation/core'
 import 'react-native-gesture-handler';
 import React from 'react';
-import { KeyboardAvoidingView, Content, StyleSheet, Text, TextInput, TouchableOpacity, View, Icon, Dimensions, ScrollView, ImageBackground, ListItem, Pressable, Button} from 'react-native';
+import {Alert, KeyboardAvoidingView, Content, StyleSheet, Text, TextInput, TouchableOpacity, View, Icon, Dimensions, ScrollView, ImageBackground, ListItem, Pressable, Button} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/LoginScreen';
@@ -12,17 +13,11 @@ import ForgetPasswordScreen from './screens/ForgetPasswordScreen';
 import ConfirmScreen from './screens/ConfirmScreen';
 import {createAppContainer} from "@react-navigation/native";
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import auth from 'firebase';
 
 
 const Stack = createNativeStackNavigator();
-const handleSignOut = () => {
-  auth
-    .signOut()
-    .then(() => {
-      navigation.replace("Login")
-    })
-    .catch(error => alert(error.message))
-}
+
 
 const handleLogin = () => {
   auth
@@ -67,14 +62,22 @@ function GradeCalculatorScreen({ navigation }) {
       <Button onPress={() => navigation.goBack()} title="Go back home" />
     </View>
   );
-} function Signout() {
+} 
+const Signout = () => {
+  const handleSignOut = () => {
+    const navigation = useNavigation()
+    auth
+      .signOut()
+      .then(() => {
+        navigation.goBack("Login")
+      })
+      .catch(error => alert(error.message))
+  }
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <TouchableOpacity
           onPress={handleSignOut}
           >
         </TouchableOpacity>
-      </View>
     );
   }
   

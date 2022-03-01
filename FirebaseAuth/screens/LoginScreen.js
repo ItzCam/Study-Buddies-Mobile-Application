@@ -1,9 +1,10 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useState, Component } from 'react';
-import { KeyboardAvoidingView, Content, StyleSheet, Text, TextInput, TouchableOpacity, View, Icon, Dimensions, ScrollView, ImageBackground, ListItem, Pressable} from 'react-native';
+import { Alert, KeyboardAvoidingView, Content, StyleSheet, Text, TextInput, TouchableOpacity, View, Icon, Dimensions, ScrollView, ImageBackground, ListItem, Pressable} from 'react-native';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
-import { auth } from '../firebase';
 import App from '../App';
+import { auth } from '../firebase';
+
 
 
 const LoginScreen = () => {
@@ -14,13 +15,22 @@ const LoginScreen = () => {
   
 
   const handleLogin = () => {
-    auth
-      .signInWithEmailAndPassword(email, password)
+    auth.signInWithEmailAndPassword(email, password)
       .then(userCredentials => {
         const user = userCredentials.user;
         console.log('Logged in with:', user.email);
+        navigation.navigate("MyDrawer")
       })
-      .catch(error => alert(error.message))
+      .catch(error => {
+        if (error.code === 'auth/invalid-email') {
+            Alert.alert('Invalid Email!', 'Email address is invalid!');
+        } else if (error.code === 'auth/user-not-found') {
+            Alert.alert('User not found!', 'User not found!');
+        } else if (error.code === 'auth/wrong-password') {
+            Alert.alert('Incorrect password!', 'Password is incorrect!');
+        }
+    })
+
   }
 
   return ( 
@@ -47,7 +57,6 @@ const LoginScreen = () => {
             <TouchableOpacity
               onPress={handleLogin}
               style={styles.button}
-              onPress={()=>navigation.navigate("MyDrawer")}
             >
             <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
