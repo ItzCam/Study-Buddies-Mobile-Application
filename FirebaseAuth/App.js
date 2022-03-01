@@ -41,7 +41,7 @@ function VolunteerTabs() {
         <Tab.Navigator tabBarOptions={{activeTintColor: '#302f90', labelStyle: {fontSize: 11, fontWeight: 'bold'}}}>
             <Tab.Screen name="Schedule" component={ScheduleScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
-            <Tab.Screen name="Volunteers" component={VolunteersScreen} options={{ tabBarIcon: () => (
+            <Tab.Screen name="Buddies" component={VolunteersScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="users" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false, tabBarIcon: () => (
                 <FontAwesome name="user" color="#333333" size={25}/>),}}/>
