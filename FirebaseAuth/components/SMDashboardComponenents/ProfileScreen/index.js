@@ -4,6 +4,8 @@ import {Image, View, ScrollView, Pressable, Text, Title} from "react-native";
 import StyledButton from "../../TitleComponents/StyledButton";
 import {auth} from "../../../db/firestore";
 import {db} from '../../../db/firestore';
+import ReactFileUploadMobile from 'react-file-upload-mobile';
+import ReactDOM from 'react-dom'
 
 const ProfileScreen = ({navigation}) => {
     const userID = auth.currentUser.uid;
@@ -38,7 +40,21 @@ const ProfileScreen = ({navigation}) => {
 
         navigation.replace('Title')
     }
-
+    state = {
+        photo: null,
+      };
+    
+      handleChoosePhoto = () => {
+        const options = {
+          noData: true,
+        };
+        ImagePicker.launchImageLibrary(options, (response) => {
+          if (response.uri) {
+            this.setState({ photo: response });
+          }
+        });
+      };
+    render()
     return (
         <ScrollView
             style={styles.container}
@@ -51,20 +67,22 @@ const ProfileScreen = ({navigation}) => {
                 />
             </View>
             <View>
-                <Text style={styles.title}>{userName}</Text>
-                <Text style={styles.title2}>{userEmail}</Text>
-                <Text style={styles.title3}>Preferred Role: {userRole === 'Both' ? 'Driver & Friendly Visitor' : userRole}</Text>
-
+                <Text style={styles.title}>Name: {userName}</Text>
+                <Text style={styles.title2}>Email: {userEmail}</Text>
+                <Text style={styles.title3}>Preferred Role: </Text>
+                <Text style={styles.title4}>Status: </Text>
             </View>
-
             <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
-                    text={'Edit Profile Screen'}
+                    text={'Edit Profile '}
                     onPress={() => navigation.navigate('Edit Profile')}
                 />
                 <Pressable onPress={logout}>
-                    <Text style={styles.footer}>Log off</Text>
+                    <StyledButton
+                        style={styles.button}
+                        text={'Log out'}
+                    />
                 </Pressable>
             </View>
         </ScrollView>
