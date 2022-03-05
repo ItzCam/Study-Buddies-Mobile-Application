@@ -76,7 +76,7 @@ const EditProfileScreen = ({navigation}) => {
                 );
             })
     }
-
+    
     return (
         <KeyboardAwareScrollView
             style={styles.container}

@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: Platform.OS === 'ios' ? 0 : -12,
         paddingLeft: 10,
-        right: '50%',
+        right: '0%',
         color: '#333333',
     },
     button: {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontStyle: 'italic',
         textAlign: 'center',
-        marginTop:15,
+        //marginTop:15,
         bottom: '20%',
         color: '#a81d20',
         marginBottom: 5,
