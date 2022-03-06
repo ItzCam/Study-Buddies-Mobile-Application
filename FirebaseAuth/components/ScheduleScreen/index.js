@@ -205,19 +205,31 @@ const ScheduleScreen = () => {
                     setSelectedButton('My schedule');
                     generateItems('My schedule');
                 }}>
+<<<<<<< HEAD
                     <Text style={(selectedButton === 'My schedule' ? styles.selectedText : styles.text)}>Mine</Text>
+=======
+                    <Text style={(selectedButton === 'My Shifts' ? styles.selectedText : styles.text)}>My</Text>
+>>>>>>> AntonioWorkspace
                 </Pressable>
                 <Pressable style={(selectedButton === 'All schedule' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
                     setSelectedButton('All schedule');
                     generateItems('All schedule');
                 }}>
+<<<<<<< HEAD
                     <Text style={(selectedButton === 'All schedule' ? styles.selectedText : styles.text)}>All</Text>
+=======
+                    <Text style={(selectedButton === 'All Shifts' ? styles.selectedText : styles.text)}>All</Text>
+>>>>>>> AntonioWorkspace
                 </Pressable>
                 <Pressable style={(selectedButton === 'Open schedule' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
                     setSelectedButton('Open schedule');
                     generateItems('Open schedule');
                 }}>
+<<<<<<< HEAD
                     <Text style={(selectedButton === 'Open schedule' ? styles.selectedText : styles.text)}>Open</Text>
+=======
+                    <Text style={(selectedButton === 'Open Shifts' ? styles.selectedText : styles.text)}>Open</Text>
+>>>>>>> AntonioWorkspace
                 </Pressable>
             </View>
             <Agenda
