@@ -53,7 +53,8 @@ const ProfileScreen = ({navigation}) => {
             <View>
                 <Text style={styles.title}>{userName}</Text>
                 <Text style={styles.title2}>{userEmail}</Text>
-                <Text style={styles.title3}>Preferred Role: {userRole === 'Both' ? 'Driver & Friendly Visitor' : userRole}</Text>
+                <Text style={styles.title2}>★★★★★</Text>
+                <Text style={styles.title3}>Preferred Role: {userRole === 'Both' ? 'Student & Friendly Visitor' : userRole}</Text>
 
             </View>
 
