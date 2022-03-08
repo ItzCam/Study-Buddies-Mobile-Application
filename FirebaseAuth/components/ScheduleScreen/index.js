@@ -217,7 +217,7 @@ const ScheduleScreen = () => {
                     setSelectedButton('Open Shifts');
                     generateItems('Open Shifts');
                 }}>
-                    <Text style={(selectedButton === 'Open Shifts' ? styles.selectedText : styles.text)}>Open Shifts</Text>
+                    <Text style={(selectedButton === 'Open Shifts' ? styles.selectedText : styles.text)}>Open</Text>
                 </Pressable>
             </View>
             <Agenda
