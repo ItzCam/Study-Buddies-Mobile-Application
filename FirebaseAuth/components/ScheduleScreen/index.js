@@ -210,7 +210,7 @@ const ScheduleScreen = () => {
                     setSelectedButton('All Shifts');
                     generateItems('All Shifts');
                 }}>
-                    <Text style={(selectedButton === 'All Shifts' ? styles.selectedText : styles.text)}>All Shifts</Text>
+                    <Text style={(selectedButton === 'All Shifts' ? styles.selectedText : styles.text)}>All</Text>
                 </Pressable>
                 <Pressable style={(selectedButton === 'Open Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
                     setSelectedButton('Open Shifts');
