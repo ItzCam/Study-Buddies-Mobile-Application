@@ -27,8 +27,8 @@ function SMDashboardTabs() {
             <Tab.Screen name="Schedule" component={ScheduleScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Create Meeting" component={CreateMeetingScreen} options={{ tabBarIcon: () => (
-                <FontAwesome name="book" color="#333333" size={25}/>),}}/>
-            <Tab.Screen name="Friends List" component={FriendsListScreen} options={{ tabBarIcon: () => (
+                    <FontAwesome name="pencil" color="#333333" size={25}/>),}}/>
+            <Tab.Screen name="Buddy List" component={VolunteersScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="users" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false, tabBarIcon: () => (
                 <FontAwesome name="user" color="#333333" size={25}/>),}}/>
