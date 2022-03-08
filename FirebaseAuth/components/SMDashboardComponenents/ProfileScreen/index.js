@@ -52,10 +52,10 @@ const ProfileScreen = ({navigation}) => {
                 />
             </View>
             <View>
-                <Text style={styles.title}>Name: {userName}</Text>
-                <Text style={styles.title2}>Email: {userEmail}</Text>
-                <Text style={styles.title3}>Preferred Role: </Text>
-                <Text style={styles.title4}>Status: </Text>
+                <Text style={styles.title}>{userName}</Text>
+                <Text style={styles.title2}>{userEmail}</Text>
+                <Text style={styles.title3}>Major: {userRole}</Text>
+
             </View>
             <View style={styles.buttonView}>
                 <StyledButton
