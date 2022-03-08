@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         marginTop: '5%',
         borderWidth: 4,
         borderRadius: 10,
-        borderColor: '#302f90',
+        borderColor: '#f6a827',
         padding: '2.5%',
     },
     miniView: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
     viewContainer: {
         borderWidth: 2,
-        borderColor: '#302f90',
+        borderColor: '#f6a827',
         borderRadius: 10,
         height: 40,
         justifyContent: 'center',
