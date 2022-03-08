@@ -8,21 +8,22 @@ import firebase from "firebase/app";
 
 let isAdmin;
 let userID, userName, userRole;
-let locationsCollection = {};
-let scheduleCollection = {};
+let routesCollection = {};
+let shiftsCollection = {};
 let markedItems = {};
 
+//TODO: Add view map above accept/reject buttons
 const ScheduleScreen = () => {
     const [items, setItems] = React.useState({});
-    const [selectedButton, setSelectedButton] = React.useState('All schedule');
+    const [selectedButton, setSelectedButton] = React.useState('All Shifts');
 
     let today = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)).toISOString().slice(0, 10);
 
     async function getData() {
         isAdmin = await getIsAdmin();
         await getUserData();
-        await getlocations();
-        await getschedule();
+        await getRoutes();
+        await getShifts();
     }
 
     async function getUserData() {
@@ -32,24 +33,23 @@ const ScheduleScreen = () => {
         userRole = userData.data().role;
     }
 
-    // get location collections information
-    async function getlocations() {
-        locationsCollection = {};
-        await db.collection('locations').get().then((snapshot) => {
+    async function getRoutes() {
+        routesCollection = {};
+        await db.collection('routes').get().then((snapshot) => {
             snapshot.docs.map(doc => {
                 if (doc !== undefined) {
-                    locationsCollection[doc.id] = doc.data();
+                    routesCollection[doc.id] = doc.data();
                 }
             })
         })
     }
 
-    async function getschedule() {
-        scheduleCollection = {};
-        await db.collection('schedule').get().then((snapshot) => {
+    async function getShifts() {
+        shiftsCollection = {};
+        await db.collection('shifts').get().then((snapshot) => {
             snapshot.docs.map(doc => {
                 if (doc !== undefined) {
-                    scheduleCollection[doc.id] = doc.data();
+                    shiftsCollection[doc.id] = doc.data();
                 }
             })
         })
@@ -60,15 +60,15 @@ const ScheduleScreen = () => {
     function generateItems(shiftButton) {
         // key = shiftID, value = shift
         let shiftItem = {};
-        for (const [key, value] of Object.entries(scheduleCollection)) {
+        for (const [key, value] of Object.entries(shiftsCollection)) {
             let addItem = false;
-            if (shiftButton === 'My schedule') {
+            if (shiftButton === 'My Shifts') {
                 if (userID === value.driverID || userID === value.friendlyVisitorID) {
                     addItem = true;
                 }
-            } else if (shiftButton === 'All schedule') {
+            } else if (shiftButton === 'All Shifts') {
                 addItem = true;
-            } else if (shiftButton === 'Open schedule') {
+            } else if (shiftButton === 'Open Shifts') {
                 if (((value.position === 'Driver' || value.position === 'Both') && (userRole === 'Driver' || userRole === 'Both')) ||
                     ((value.position === 'Friendly Visitor' || value.position === 'Both') && (userRole === 'Friendly Visitor' || userRole === 'Both'))) {
                     if (userID !== value.driverID && userID !== value.friendlyVisitorID) {
@@ -79,7 +79,7 @@ const ScheduleScreen = () => {
             if (addItem) {
                 if (shiftItem[value['date']] === undefined)
                     shiftItem[value['date']] = [];
-                let shiftObject = Object.assign(scheduleCollection[key], {marked: true, id: key});
+                let shiftObject = Object.assign(shiftsCollection[key], {marked: true, id: key});
                 shiftItem[value['date']].push(shiftObject);
             }
         }
@@ -93,24 +93,24 @@ const ScheduleScreen = () => {
     }
 
     function acceptShift(shift, assignedRole) {
-        db.collection('schedule').doc(shift.id).update({[assignedRole]: userName});
-        db.collection('schedule').doc(shift.id).update({[assignedRole + 'ID']: userID});
+        db.collection('shifts').doc(shift.id).update({[assignedRole]: userName});
+        db.collection('shifts').doc(shift.id).update({[assignedRole + 'ID']: userID});
         getData();
     }
 
     async function dropShift(shift, assignedRole) {
-        await db.collection('schedule').doc(shift.id).update({[assignedRole]: firebase.firestore.FieldValue.delete()});
-        await db.collection('schedule').doc(shift.id).update({[assignedRole + 'ID']: firebase.firestore.FieldValue.delete()});
+        await db.collection('shifts').doc(shift.id).update({[assignedRole]: firebase.firestore.FieldValue.delete()});
+        await db.collection('shifts').doc(shift.id).update({[assignedRole + 'ID']: firebase.firestore.FieldValue.delete()});
         getData();
     }
 
     async function deleteShift(shift) {
-        await db.collection('schedule').doc(shift.id).delete();
+        await db.collection('shifts').doc(shift.id).delete();
         getData();
     }
 
     function renderItem(shift) {
-        if (Object.keys(locationsCollection).length === 0)
+        if (Object.keys(routesCollection).length === 0)
             return;
 
         let futureDate = true;
@@ -152,7 +152,7 @@ const ScheduleScreen = () => {
             dropView = true;
         }
 
-        let routeInfo = locationsCollection[shift.route];
+        let routeInfo = routesCollection[shift.route];
 
             return (
             <View style={{
@@ -201,21 +201,21 @@ const ScheduleScreen = () => {
     return (
         <View style={{flex: 1}}>
             <View style={styles.shiftButtonView}>
-                <Pressable style={(selectedButton === 'My schedule' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
-                    setSelectedButton('My schedule');
-                    generateItems('My schedule');
+                <Pressable style={(selectedButton === 'My Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
+                    setSelectedButton('My Shifts');
+                    generateItems('My Shifts');
                 }}>
                     <Text style={(selectedButton === 'My Shifts' ? styles.selectedText : styles.text)}>My</Text>
                 </Pressable>
-                <Pressable style={(selectedButton === 'All schedule' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
-                    setSelectedButton('All schedule');
-                    generateItems('All schedule');
+                <Pressable style={(selectedButton === 'All Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
+                    setSelectedButton('All Shifts');
+                    generateItems('All Shifts');
                 }}>
                     <Text style={(selectedButton === 'All Shifts' ? styles.selectedText : styles.text)}>All</Text>
                 </Pressable>
-                <Pressable style={(selectedButton === 'Open schedule' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
-                    setSelectedButton('Open schedule');
-                    generateItems('Open schedule');
+                <Pressable style={(selectedButton === 'Open Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
+                    setSelectedButton('Open Shifts');
+                    generateItems('Open Shifts');
                 }}>
                     <Text style={(selectedButton === 'Open Shifts' ? styles.selectedText : styles.text)}>Open</Text>
                 </Pressable>
@@ -227,7 +227,7 @@ const ScheduleScreen = () => {
                 showClosingKnob={true}
                 markedDates={markedItems}
                 onRefresh={getData}
-                onCalendarToggled={getschedule}
+                onCalendarToggled={getShifts}
                 style={styles}
                 theme={{
                     agendaKnobColor: '#302f90',
