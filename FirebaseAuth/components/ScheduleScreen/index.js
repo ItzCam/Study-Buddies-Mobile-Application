@@ -205,19 +205,19 @@ const ScheduleScreen = () => {
                     setSelectedButton('My Shifts');
                     generateItems('My Shifts');
                 }}>
-                    <Text style={(selectedButton === 'My Shifts' ? styles.selectedText : styles.text)}>My Shifts</Text>
+                    <Text style={(selectedButton === 'My Shifts' ? styles.selectedText : styles.text)}>My</Text>
                 </Pressable>
                 <Pressable style={(selectedButton === 'All Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
                     setSelectedButton('All Shifts');
                     generateItems('All Shifts');
                 }}>
-                    <Text style={(selectedButton === 'All Shifts' ? styles.selectedText : styles.text)}>All Shifts</Text>
+                    <Text style={(selectedButton === 'All Shifts' ? styles.selectedText : styles.text)}>All</Text>
                 </Pressable>
                 <Pressable style={(selectedButton === 'Open Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
                     setSelectedButton('Open Shifts');
                     generateItems('Open Shifts');
                 }}>
-                    <Text style={(selectedButton === 'Open Shifts' ? styles.selectedText : styles.text)}>Open Shifts</Text>
+                    <Text style={(selectedButton === 'Open Shifts' ? styles.selectedText : styles.text)}>Open</Text>
                 </Pressable>
             </View>
             <Agenda

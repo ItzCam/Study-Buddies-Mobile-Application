@@ -14,7 +14,7 @@ import CreateProfileScreen from "./components/TitleComponents/CreateProfileScree
 import ForgotPasswordScreen from './components/TitleComponents/ForgotPasswordScreen'
 import ScheduleScreen from "./components/ScheduleScreen";
 import VolunteersScreen from "./components/SMDashboardComponenents/VolunteersScreen";
-import CreateShiftScreen from "./components/SMDashboardComponenents/CreateShiftScreen";
+import CreateMeetingScreen from "./components/SMDashboardComponenents/CreateMeetingScreen";
 import ProfileScreen from "./components/SMDashboardComponenents/ProfileScreen";
 import EditProfileScreen from './components/SMDashboardComponenents/EditProfileScreen';
 
@@ -26,9 +26,9 @@ function SMDashboardTabs() {
         <Tab.Navigator screenOptions={{tabBarActiveTintColor: "#302f90", tabBarLabelStyle: {fontSize: 11, fontWeight: "bold"}}}>
             <Tab.Screen name="Schedule" component={ScheduleScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
-            <Tab.Screen name="Create Shift" component={CreateShiftScreen} options={{ tabBarIcon: () => (
-                    <FontAwesome name="truck" color="#333333" size={25}/>),}}/>
-            <Tab.Screen name="Volunteers" component={VolunteersScreen} options={{ tabBarIcon: () => (
+            <Tab.Screen name="Create Meeting" component={CreateMeetingScreen} options={{ tabBarIcon: () => (
+                    <FontAwesome name="pencil" color="#333333" size={25}/>),}}/>
+            <Tab.Screen name="Buddy List" component={VolunteersScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="users" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false, tabBarIcon: () => (
                 <FontAwesome name="user" color="#333333" size={25}/>),}}/>
