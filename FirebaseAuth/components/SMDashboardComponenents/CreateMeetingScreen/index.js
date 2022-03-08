@@ -10,7 +10,7 @@ import Gallery from "react-native-image-gallery";
 
 let routesCollection = {};
 
-const CreateShiftScreen = ({navigation}) => {
+const CreateMeetingScreen = ({navigation}) => {
     const [routeItems, setRouteItems] = React.useState([]);
 
     const [selectedRoute, setSelectedRoute] = React.useState();
@@ -199,4 +199,4 @@ const CreateShiftScreen = ({navigation}) => {
     );
 }
 
-export default CreateShiftScreen;
+export default CreateMeetingScreen;
