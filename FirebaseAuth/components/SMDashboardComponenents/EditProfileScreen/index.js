@@ -76,7 +76,7 @@ const EditProfileScreen = ({navigation}) => {
                 );
             })
     }
-    
+
     return (
         <KeyboardAwareScrollView
             style={styles.container}
@@ -162,8 +162,8 @@ const EditProfileScreen = ({navigation}) => {
                 />
             </View>
             <View style={styles.action}>
-                <Text style={styles.title5}>Preferred Role</Text>
-                <FontAwesome name="briefcase" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
+                <Text style={styles.title5}>Major</Text>
+                <FontAwesome name="book" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 {/*Android Bug*/}
             </View>
             <RNPickerSelect
@@ -171,9 +171,9 @@ const EditProfileScreen = ({navigation}) => {
                 onValueChange={setUserRole}
                 selectedValue={userRole}
                 items={[
-                    {label: 'Driver', value: 'Driver'},
-                    {label: 'Friendly Visitor', value: 'Friendly Visitor'},
-                    {label: 'Driver & Friendly Visitor', value: 'Both'},
+                    {label: 'Computer Science', value: 'Computer Science'},
+                    {label: 'Computer Engineering', value: 'Computer Engineering'},
+                    {label: 'Aerospace Engineering', value: 'Aerospace Engineering'},
                 ]}
                 placeholder={{}}
                 value={userRole}

@@ -35,6 +35,16 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
     },
+    imageContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      headerText: {
+        color: '#fff',
+        fontSize: 20,
+      },
+      body: {flex: 1},
 });
 
 export default styles;

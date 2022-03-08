@@ -17,7 +17,7 @@ import FriendsListScreen from "./components/SMDashboardComponenents/FriendsListS
 import CreateMeetingScreen from "./components/SMDashboardComponenents/CreateMeetingScreen";
 import ProfileScreen from "./components/SMDashboardComponenents/ProfileScreen";
 import EditProfileScreen from './components/SMDashboardComponenents/EditProfileScreen';
-
+import CalculatorScreen from "./components/SMDashboardComponenents/CalculatorScreen";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -54,6 +54,7 @@ function ProfileStack() {
         <Stack.Navigator>
             <Stack.Screen name ="Profile " component={ProfileScreen}/>
             <Stack.Screen name ="Edit Profile" component={EditProfileScreen}/>
+            <Stack.Screen name ="Calculator" component={CalculatorScreen}/>
         </Stack.Navigator>
     );
 }

@@ -4,7 +4,6 @@ import {Image, View, ScrollView, Pressable, Text, Title} from "react-native";
 import StyledButton from "../../TitleComponents/StyledButton";
 import {auth} from "../../../db/firestore";
 import {db} from '../../../db/firestore';
-import ReactFileUploadMobile from 'react-file-upload-mobile';
 import ReactDOM from 'react-dom'
 
 const ProfileScreen = ({navigation}) => {
@@ -23,7 +22,7 @@ const ProfileScreen = ({navigation}) => {
         let userRole = userData.data().role;
         setUserRole(userRole);
     }
-
+    
     useEffect(() => {
         getUserData();
     }, []);
@@ -40,21 +39,7 @@ const ProfileScreen = ({navigation}) => {
 
         navigation.replace('Title')
     }
-    state = {
-        photo: null,
-      };
     
-      handleChoosePhoto = () => {
-        const options = {
-          noData: true,
-        };
-        ImagePicker.launchImageLibrary(options, (response) => {
-          if (response.uri) {
-            this.setState({ photo: response });
-          }
-        });
-      };
-    render()
     return (
         <ScrollView
             style={styles.container}
@@ -77,6 +62,11 @@ const ProfileScreen = ({navigation}) => {
                     style={styles.button}
                     text={'Edit Profile '}
                     onPress={() => navigation.navigate('Edit Profile')}
+                />
+                 <StyledButton
+                    style={styles.button}
+                    text={'Calculator '}
+                    onPress={() => navigation.navigate('Calculator')}
                 />
                 <Pressable onPress={logout}>
                     <StyledButton
