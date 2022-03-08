@@ -8,12 +8,12 @@ import StyledButton from "../../TitleComponents/StyledButton";
 import {db} from "../../../db/firestore";
 import Gallery from "react-native-image-gallery";
 
-let routesCollection = {};
+let locationsCollection = {};
 
 const CreateMeetingScreen = ({navigation}) => {
-    const [routeItems, setRouteItems] = React.useState([]);
+    const [locationItems, setLocationItems] = React.useState([]); 
 
-    const [selectedRoute, setSelectedRoute] = React.useState();
+    const [selectedLocation, setSelectedLocation] = React.useState();
     const [selectedPosition, setSelectedPosition] = React.useState();
 
     const [disabled, setDisabled] = React.useState(true);
@@ -23,27 +23,27 @@ const CreateMeetingScreen = ({navigation}) => {
 
     const [show, setShow] = React.useState(false);
 
-    const [routePhotoURL, setRoutePhotoURL] = React.useState();
-    const [routeDescription, setRouteDescription] = React.useState();
-    const [routeStops, setRouteStops] = React.useState();
-    const [routeTime, setRouteTime] = React.useState();
+    const [locationPhotoURL, setLocationPhotoURL] = React.useState();
+    const [locationDescription, setLocationDescription] = React.useState();
+    const [locationStops, setLocationStops] = React.useState();
+    const [locationTime, setLocationTime] = React.useState();
 
-    async function getRoutes() {
-        await db.collection('routes').get().then((snapshot) => {
+    async function getLocations() {
+        await db.collection('locations').get().then((snapshot) => {
             snapshot.docs.map(doc => {
                 if (doc !== undefined) {
-                    routesCollection[doc.id] = doc.data();
+                    locationsCollection[doc.id] = doc.data();
                 }
             })
         })
 
-        generateRouteItems();
+        generateLocationItems();
     }
 
-    function generateRouteItems() {
-        let routes = [];
-        for (const key of Object.keys(routesCollection)) {
-            routes.push(key);
+    function generateLocationItems() {
+        let locations = [];
+        for (const key of Object.keys(locationsCollection)) {
+            locations.push(key);
         }
 
         /*let lowRoutes = [];
@@ -53,22 +53,22 @@ const CreateMeetingScreen = ({navigation}) => {
             }
         }*/
 
-        routes.sort();
+        locations.sort();
 
-        let newRouteItems = [];
-        for (const route of routes) {
-            newRouteItems.push({label: route, value: route})
+        let newLocationItems = [];
+        for (const location of locations) {
+            newLocationItems.push({label: location, value: location})
         }
 
-        setRouteItems(newRouteItems);
+        setLocationItems(newLocationItems);
     }
 
-    function setRouteProperties(route) {
-        if (routesCollection[route] !== undefined) {
-            setRoutePhotoURL(routesCollection[route]['photoURL']);
-            setRouteDescription(routesCollection[route]['desc']);
-            setRouteStops(routesCollection[route]['approxStops']);
-            setRouteTime(routesCollection[route]['time']);
+    function setLocationProperties(location) {
+        if (locationsCollection[location] !== undefined) {
+            setLocationPhotoURL(locationsCollection[location]['photoURL']);
+            setLocationDescription(locationsCollection[location]['buildingDescription']);
+            setLocationStops(locationsCollection[location]['parkingAmenities']);
+            setLocationTime(locationsCollection[location]['time']);
         }
     }
 
@@ -78,48 +78,48 @@ const CreateMeetingScreen = ({navigation}) => {
     }
 
     function post() {
-        console.log(selectedRoute);
+        console.log(selectedLocation);
         console.log('SELECTED DATE')
         console.log(selectedDate);
-        console.log(selectedPosition);
-        if (selectedRoute === undefined || selectedPosition === undefined) {
+        console.log(selectedMajor);
+        if (selectedLocation === undefined || selectedMajor === undefined) {
             Alert.alert('Missing information!');
         } else {
             let dateFormat = selectedDate.toISOString().slice(0, 10);
-            db.collection('shifts').add({date: dateFormat, position: selectedPosition, route: selectedRoute});
-            Alert.alert('Shift posted!');
+            db.collection('schedules').add({date: dateFormat, major: selectedMajor, location: selectedLocation});
+            Alert.alert('Meeting has been posted!');
         }
     }
 
-    if (routeItems.length === 0)
-        getRoutes();
+    if (locationItems.length === 0)
+        getLocations();
 
     return (
         <ScrollView style={styles.container} contentContainerStyle={styles.containerStyle}>
             <View style={styles.inputView}>
                 <View style={styles.miniView}>
-                    <Text>Route Number:</Text>
+                    <Text>Meeting Location:</Text>
                     <RNPickerSelect
                         style={styles}
-                        onValueChange={function (route) {
-                            setSelectedRoute(route);
-                            console.log(route);
-                            if (route !== undefined) {
+                        onValueChange={function (location) {
+                            setSelectedLocation(location);
+                            console.log(location);
+                            if (location !== undefined) {
                                 setDisabled(false);
-                                setRouteProperties(route);
+                                setLocationProperties(location);
                             } else {
                                 setDisabled(true);
                             }
                         }}
-                        selectedValue={selectedRoute}
-                        items={routeItems}
-                        placeholder={{label: 'Select a route...'}}
+                        selectedValue={selectedLocation}
+                        items={locationItems}
+                        placeholder={{label: 'Select a meeting location...'}}
                     />
                 </View>
 
                 {/* View Map Button */}
                 <View style={styles.miniView}>
-                    <Text>Route Map:</Text>
+                    <Text>View Meeting Location:</Text>
                     <StyledButton
                         onPress={() => {
                             setShow(true)
@@ -132,7 +132,7 @@ const CreateMeetingScreen = ({navigation}) => {
                         <View style={styles.modal}>
                             <View style={{height: '90%'}}>
                                 <Gallery
-                                    images={[{source: {uri: routePhotoURL}}]}/>
+                                    images={[{source: {uri: locationPhotoURL}}]}/>
                             </View>
                             <StyledButton
                                 text="Close Map"
@@ -144,22 +144,22 @@ const CreateMeetingScreen = ({navigation}) => {
                 </View>
 
                 <View style={styles.miniView}>
-                    <Text>Route Description:</Text>
-                    <Text>{routeDescription}</Text>
+                    <Text>Description:</Text>
+                    <Text>{locationDescription}</Text>
                 </View>
 
                 <View style={styles.miniView}>
-                    <Text>Route Stops:</Text>
-                    <Text>{routeStops}</Text>
+                    <Text>Amenities:</Text>
+                    <Text>{locationStops}</Text>
                 </View>
 
                 <View style={styles.miniView}>
-                    <Text>Route Time:</Text>
-                    <Text>{routeTime}</Text>
+                    <Text>Hours:</Text>
+                    <Text>{locationTime}</Text>
                 </View>
 
                 <View style={styles.miniView}>
-                    <Text>Day Open:</Text>
+                    <Text>Select Meeting Date:</Text>
                     <StyledButton
                         onPress={() => setDatePickerVisibility(true)}
                         text={selectedDate.toDateString()}>
@@ -173,14 +173,14 @@ const CreateMeetingScreen = ({navigation}) => {
                 </View>
 
                 <View style={styles.miniView}>
-                    <Text>Positions Open:</Text>
+                    <Text>Majors:</Text>
                     <RNPickerSelect
                         style={styles}
                         onValueChange={(value) => setSelectedPosition(value)}
                         selectedValue={selectedPosition}
-                        placeholder={{label: 'Select a position...'}}
+                        placeholder={{label: 'Select a major for your meeting...'}}
                         items={[
-                            {label: 'Driver', value: 'Driver'},
+                            {label: 'Computer Science', value: 'Computer Science'},
                             {label: 'Friendly Visitor', value: 'Friendly Visitor'},
                             {label: 'Driver & Friendly Visitor', value: 'Both'},
                         ]}
@@ -191,7 +191,7 @@ const CreateMeetingScreen = ({navigation}) => {
             <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
-                    text={'Post Shift'}
+                    text={'Schedule Meeting'}
                     onPress={post}
                 />
             </View>
