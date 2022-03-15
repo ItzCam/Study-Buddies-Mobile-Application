@@ -5,13 +5,20 @@ import StyledButton from '../StyledButton';
 import {auth} from '../../../db/firestore';
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
-//TODO: Dropdown menu for occupation: friendly visitor, driver, both
-
+/**
+ * User sign up screen to enter and verify credentials
+ * @param {*} param0 navigation parameter from main application stack navigator
+ * @returns New User Sign Up Screen
+ */
 const SignUpScreen = ({navigation}) => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [confirmPassword, setConfirmPassword] = React.useState('');
 
+    /**
+     * Input verification function with user warning if credentials do not match
+     * @returns True if email and passwords entered are valid. False otherwise
+     */
     function verifyInput() {
         let flag = true;
         if (!email.includes('@') || !email.includes('.')) {
@@ -25,6 +32,10 @@ const SignUpScreen = ({navigation}) => {
         return flag;
     }
 
+    /**
+     * Valid email verification from existing database information
+     * @returns valid email address prompt, null otherwise
+     */
     function verifyEmail() {
         if (email === '' || email === undefined) {
             return;
@@ -33,6 +44,10 @@ const SignUpScreen = ({navigation}) => {
         }
     }
 
+    /**
+     * Password verification based on length and existing status in database
+     * @returns Password requirement prompt if invalid. Null otherwise
+     */
     function verifyPassword() {
         if (password === '' || password === undefined) {
             return;
@@ -41,6 +56,10 @@ const SignUpScreen = ({navigation}) => {
         }
     }
 
+    /**
+     * Password second entry verification
+     * @returns prompt for user to enter matching password for validation. Null otherwise
+     */
     function verifyConfirmPassword() {
         if (confirmPassword === '' || confirmPassword === undefined) {
             return;
@@ -50,6 +69,10 @@ const SignUpScreen = ({navigation}) => {
         }
     }
 
+    /**
+     * Register user to FireStore database
+     * @returns Sign up screen elements and console log outputs for verification
+     */
     function registerUser() {
         if (!verifyInput()) {
             return;
