@@ -14,7 +14,7 @@ const CreateMeetingScreen = ({navigation}) => {
     const [locationItems, setLocationItems] = React.useState([]); 
 
     const [selectedLocation, setSelectedLocation] = React.useState();
-    const [selectedPosition, setSelectedPosition] = React.useState();
+    const [selectedMajor, setSelectedMajor] = React.useState();
 
     const [disabled, setDisabled] = React.useState(true);
 
@@ -25,7 +25,7 @@ const CreateMeetingScreen = ({navigation}) => {
 
     const [locationPhotoURL, setLocationPhotoURL] = React.useState();
     const [locationDescription, setLocationDescription] = React.useState();
-    const [locationStops, setLocationStops] = React.useState();
+    const [locationAmenities, setLocationAmenities] = React.useState();
     const [locationTime, setLocationTime] = React.useState();
 
     async function getLocations() {
@@ -67,7 +67,7 @@ const CreateMeetingScreen = ({navigation}) => {
         if (locationsCollection[location] !== undefined) {
             setLocationPhotoURL(locationsCollection[location]['photoURL']);
             setLocationDescription(locationsCollection[location]['buildingDescription']);
-            setLocationStops(locationsCollection[location]['parkingAmenities']);
+            setLocationAmenities(locationsCollection[location]['parkingAmenities']);
             setLocationTime(locationsCollection[location]['time']);
         }
     }
@@ -150,7 +150,7 @@ const CreateMeetingScreen = ({navigation}) => {
 
                 <View style={styles.miniView}>
                     <Text>Amenities:</Text>
-                    <Text>{locationStops}</Text>
+                    <Text>{locationAmenities}</Text>
                 </View>
 
                 <View style={styles.miniView}>
@@ -176,8 +176,8 @@ const CreateMeetingScreen = ({navigation}) => {
                     <Text>Majors:</Text>
                     <RNPickerSelect
                         style={styles}
-                        onValueChange={(value) => setSelectedPosition(value)}
-                        selectedValue={selectedPosition}
+                        onValueChange={(value) => setSelectedMajor(value)}
+                        selectedValue={selectedMajor}
                         placeholder={{label: 'Select a major for your meeting...'}}
                         items={[
                             {label: 'Computer Science', value: 'Computer Science'},
