@@ -12,7 +12,7 @@ import SignUpScreen from "./components/TitleComponents/SignUpScreen";
 import CreateProfileScreen from "./components/TitleComponents/CreateProfileScreen";
 import ForgotPasswordScreen from './components/TitleComponents/ForgotPasswordScreen'
 import ScheduleScreen from "./components/ScheduleScreen";
-import VolunteersScreen from "./components/SMDashboardComponenents/VolunteersScreen";
+import FriendsListScreen from "./components/SMDashboardComponenents/FriendsListScreen";
 import CreateMeetingScreen from "./components/SMDashboardComponenents/CreateMeetingScreen";
 import ProfileScreen from "./components/SMDashboardComponenents/ProfileScreen";
 import EditProfileScreen from './components/SMDashboardComponenents/EditProfileScreen';
@@ -27,7 +27,7 @@ function SMDashboardTabs() {
                 <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Create Meeting" component={CreateMeetingScreen} options={{ tabBarIcon: () => (
                     <FontAwesome name="pencil" color="#333333" size={25}/>),}}/>
-            <Tab.Screen name="Buddy List" component={VolunteersScreen} options={{ tabBarIcon: () => (
+            <Tab.Screen name="Buddy List" component={FriendsListScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="users" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false, tabBarIcon: () => (
                 <FontAwesome name="user" color="#333333" size={25}/>),}}/>

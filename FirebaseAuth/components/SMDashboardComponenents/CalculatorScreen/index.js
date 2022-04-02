@@ -1,5 +1,6 @@
 import React, {Component, component} from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import {StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
+import { ElementFlags } from 'typescript';
 
 export default class CalculatorScreen extends Component{
     constructor() {
@@ -7,6 +8,16 @@ export default class CalculatorScreen extends Component{
         this.state = {}
     }
     render(){
+        let rows = {} 
+        for (let i = 0; i < 4; i++){
+            let row = []
+            for (let j = 0; j < 3; j++){
+                row.push(<TouchableOpacity style = {styles.btn}>
+                    <Text>{i+1}</Text>
+                </TouchableOpacity>)
+            }
+            rows.push(<View style = {styles.row}>{row}</View>)
+        }
         return(
             <View style = {styles.container}>
                 <View style = {styles.result}>
@@ -17,26 +28,7 @@ export default class CalculatorScreen extends Component{
                     </View>
                 <View style = {styles.buttons}>
                     <View style = {styles.numbers}>
-                        <View style = {styles.row}>
-                            <Button title = "1"/>
-                            <Button title = "2"/>
-                            <Button title = "3"/>
-                        </View>
-                        <View style = {styles.row}>
-                            <Button title = "4"/>
-                            <Button title = "5"/>
-                            <Button title = "6"/>
-                        </View>
-                        <View style = {styles.row}>
-                            <Button title = "7"/>
-                            <Button title = "8"/>
-                            <Button title = "9"/>
-                        </View>
-                        <View style = {styles.row}>
-                            <Button title = "*"/>
-                            <Button title = "0"/>
-                            <Button title = "#"/>
-                        </View>
+                        {rows}
                     </View>
                     <View style={styles.operations}>
                         <Button title = "+"/>
@@ -61,6 +53,12 @@ const styles = StyleSheet.create({
     CalculationText:{
         fontSize:24,
         color: 'white'
+    },
+    btn: {
+        flex: 1,
+        alignItems: 'center',
+        alignSelf: 'strech',
+        justifyContent: 'center'
     },
     row: {
         flexDirection: 'row',
