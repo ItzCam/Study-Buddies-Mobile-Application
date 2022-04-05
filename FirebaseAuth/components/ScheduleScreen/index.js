@@ -8,22 +8,22 @@ import firebase from "firebase/app";
 
 let isAdmin;
 let userID, userName, userRole;
-let routesCollection = {};
-let shiftsCollection = {};
+let locationsCollection = {};
+let schedulesCollection = {};
 let markedItems = {};
 
 //TODO: Add view map above accept/reject buttons
 const ScheduleScreen = () => {
     const [items, setItems] = React.useState({});
-    const [selectedButton, setSelectedButton] = React.useState('All Shifts');
+    const [selectedButton, setSelectedButton] = React.useState('All');
 
     let today = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)).toISOString().slice(0, 10);
 
     async function getData() {
         isAdmin = await getIsAdmin();
         await getUserData();
-        await getRoutes();
-        await getShifts();
+        await getLocations();
+        await getSchedules();
     }
 
     async function getUserData() {
@@ -33,23 +33,23 @@ const ScheduleScreen = () => {
         userRole = userData.data().role;
     }
 
-    async function getRoutes() {
-        routesCollection = {};
-        await db.collection('routes').get().then((snapshot) => {
+    async function getLocations() {
+        locationsCollection = {};
+        await db.collection('locations').get().then((snapshot) => {
             snapshot.docs.map(doc => {
                 if (doc !== undefined) {
-                    routesCollection[doc.id] = doc.data();
+                    locationsCollection[doc.id] = doc.data();
                 }
             })
         })
     }
 
-    async function getShifts() {
-        shiftsCollection = {};
-        await db.collection('shifts').get().then((snapshot) => {
+    async function getSchedules() {
+        schedulesCollection = {};
+        await db.collection('schedules').get().then((snapshot) => {
             snapshot.docs.map(doc => {
                 if (doc !== undefined) {
-                    shiftsCollection[doc.id] = doc.data();
+                    schedulesCollection[doc.id] = doc.data();
                 }
             })
         })
@@ -57,84 +57,84 @@ const ScheduleScreen = () => {
         generateItems(selectedButton);
     }
 
-    function generateItems(shiftButton) {
+    function generateItems(scheduleButton) {
         // key = shiftID, value = shift
-        let shiftItem = {};
-        for (const [key, value] of Object.entries(shiftsCollection)) {
+        let scheduleItem = {};
+        for (const [key, value] of Object.entries(schedulesCollection)) {
             let addItem = false;
-            if (shiftButton === 'My Shifts') {
-                if (userID === value.driverID || userID === value.friendlyVisitorID) {
+            if (scheduleButton === 'My') {
+                if (userID === value.computerscienceID || userID === value.computerengineeringID) {
                     addItem = true;
                 }
-            } else if (shiftButton === 'All Shifts') {
+            } else if (scheduleButton === 'All') {
                 addItem = true;
-            } else if (shiftButton === 'Open Shifts') {
-                if (((value.position === 'Driver' || value.position === 'Both') && (userRole === 'Driver' || userRole === 'Both')) ||
-                    ((value.position === 'Friendly Visitor' || value.position === 'Both') && (userRole === 'Friendly Visitor' || userRole === 'Both'))) {
-                    if (userID !== value.driverID && userID !== value.friendlyVisitorID) {
+            } else if (scheduleButton === 'Open') {
+                if (((value.position === 'Computer Science') && (userRole === 'Computer Science')) ||
+                    ((value.position === 'Computer Engineering') && (userRole === 'Computer Engineering'))) {
+                    if (userID !== value.computerscienceID && userID !== value.computerengineeringID) {
                         addItem = true;
                     }
                 }
             }
             if (addItem) {
-                if (shiftItem[value['date']] === undefined)
-                    shiftItem[value['date']] = [];
-                let shiftObject = Object.assign(shiftsCollection[key], {marked: true, id: key});
-                shiftItem[value['date']].push(shiftObject);
+                if (scheduleItem[value['date']] === undefined)
+                    scheduleItem[value['date']] = [];
+                let scheduleObject = Object.assign(schedulesCollection[key], {marked: true, id: key});
+                scheduleItem[value['date']].push(scheduleObject);
             }
         }
 
         markedItems = {};
-        for (const key of Object.keys(shiftItem)) {
-            markedItems[key] = shiftItem[key][0];
+        for (const key of Object.keys(scheduleItem)) {
+            markedItems[key] = scheduleItem[key][0];
         }
 
-        setItems(shiftItem);
+        setItems(scheduleItem);
     }
 
-    function acceptShift(shift, assignedRole) {
-        db.collection('shifts').doc(shift.id).update({[assignedRole]: userName});
-        db.collection('shifts').doc(shift.id).update({[assignedRole + 'ID']: userID});
+    function acceptMeeting(meeting, assignedRole) {
+        db.collection('schedules').doc(meeting.id).update({[assignedRole]: userName});
+        db.collection('schedules').doc(meeting.id).update({[assignedRole + 'ID']: userID});
         getData();
     }
 
-    async function dropShift(shift, assignedRole) {
-        await db.collection('shifts').doc(shift.id).update({[assignedRole]: firebase.firestore.FieldValue.delete()});
-        await db.collection('shifts').doc(shift.id).update({[assignedRole + 'ID']: firebase.firestore.FieldValue.delete()});
+    async function dropMeeting(meeting, assignedRole) {
+        await db.collection('schedules').doc(meeting.id).update({[assignedRole]: firebase.firestore.FieldValue.delete()});
+        await db.collection('schedules').doc(meeting.id).update({[assignedRole + 'ID']: firebase.firestore.FieldValue.delete()});
         getData();
     }
 
-    async function deleteShift(shift) {
-        await db.collection('shifts').doc(shift.id).delete();
+    async function deleteMeeting(meeting) {
+        await db.collection('schedules').doc(meeting.id).delete();
         getData();
     }
 
-    function renderItem(shift) {
-        if (Object.keys(routesCollection).length === 0)
+    function renderItem(meeting) {
+        if (Object.keys(locationsCollection).length === 0)
             return;
 
         let futureDate = true;
-        if (new Date(shift.time).getTime() < new Date(today).getTime()) {
+        if (new Date(meeting.time).getTime() < new Date(today).getTime()) {
             futureDate = false;
         }
 
         let acceptView = false;
         let potentialRole;
-        if (shift.position === 'Driver' || shift.position === 'Both') {
-            if (userRole === 'Driver' || userRole === 'Both') {
-                if (shift.driver === undefined) {
+        if (meeting.position === 'Computer Science') {
+            if (userRole === 'Computer Science') {
+                if (meeting.computerScience === undefined) {
                     acceptView = true;
-                    potentialRole = 'driver';
+                    potentialRole = 'computerScience';
                 }
             }
         }
 
-        if (shift.position === 'Friendly Visitor' || shift.position === 'Both') {
-            if (userRole === 'Friendly Visitor' || userRole === 'Both') {
-                if (shift.friendlyVisitor === undefined) {
+        if (meeting.position === 'Computer Engineering') {
+            if (userRole === 'Computer Engineering') {
+                if (meeting.computerEngineering === undefined) {
                     if (potentialRole === undefined) {
                         acceptView = true;
-                        potentialRole = 'friendlyVisitor';
+                        potentialRole = 'computerEngineering';
                     }
                 }
             }
@@ -142,17 +142,17 @@ const ScheduleScreen = () => {
 
         let assignedRole;
         let dropView = false;
-        if (userID === shift.driverID) {
-            assignedRole = 'driver';
+        if (userID === meeting.computerscienceID) {
+            assignedRole = 'computerScience';
             acceptView = false;
             dropView = true;
-        } else if (userID === shift.friendlyVisitorID) {
-            assignedRole = 'friendlyVisitor';
+        } else if (userID === meeting.computerengineeringID) {
+            assignedRole = 'computerEngineering';
             acceptView = false;
             dropView = true;
         }
 
-        let routeInfo = routesCollection[shift.route];
+        let locationInfo = locationsCollection[meeting.location];
 
             return (
             <View style={{
@@ -165,30 +165,30 @@ const ScheduleScreen = () => {
                 padding: '5%'
             }}>
                 <View style={styles.postTextView}>
-                    <Text style={styles.firstLine}>Route {shift.route}</Text>
-                    <Text style={styles.firstLine}>{routeInfo.time}</Text>
+                    <Text style={styles.firstLine}>Location {meeting.location}</Text>
+                    <Text style={styles.firstLine}>{locationInfo.time}</Text>  
                 </View>
                 <View style={styles.postTextView}>
-                    <Text style={styles.secondLine}>Info: {routeInfo.desc}</Text>
-                    <Text style={styles.secondLine}>Stops: {routeInfo.approxStops}</Text>
+                    <Text style={styles.secondLine}>Info: {locationInfo.buildingDescription}</Text>
+                    <Text style={styles.secondLine}>Amenities: {locationInfo.parkingAmenities}</Text>
                 </View>
                 <View style={styles.postTextView}>
-                    <Text style={styles.thirdLine}>Positions: {shift.position === 'Both' ? 'Driver & Friendly Visitor' : shift.position}</Text>
+                    <Text style={styles.thirdLine}>Major: {meeting.position === 'Both' ? 'Computer Science & Computer Engineering' : meeting.position}</Text>
                 </View>
                 <View style={styles.postTextView}>
-                    {(shift.position === 'Driver' || shift.position === 'Both') && <Text style={styles.secondLine}>Driver: {shift.driver}</Text>}
-                    {(shift.position === 'Friendly Visitor' || shift.position === 'Both') && <Text style={styles.secondLine}>Friendly Visitor: {shift.friendlyVisitor}</Text>}
+                    {(meeting.position === 'Computer Science') && <Text style={styles.secondLine}>Computer Science: {meeting.computerScience}</Text>}
+                    {(meeting.position === 'Computer Engineering') && <Text style={styles.secondLine}>Computer Engineering: {meeting.computerEngineering}</Text>}
                 </View>
                 {futureDate && <View style={styles.buttonView}>
                     {acceptView && <Button title={'Accept'} color={'#018704'} onPress={function () {
-                        acceptShift(shift, potentialRole);
+                        acceptMeeting(meeting, potentialRole);
                     }}/>}
                     {dropView && <Button title={'Drop'} color={'#a22629'} onPress={function () {
-                        dropShift(shift, assignedRole);
+                        dropMeeting(meeting, assignedRole);
                     }}/>}
                     <Button title={'More Info'} color={'#302f90'}/>
                     {isAdmin && <Button title={'Delete'} color={'#a22629'} onPress={function () {
-                        deleteShift(shift);
+                        deleteMeeting(meeting);
                     }}/>}
                 </View>}
             </View>
@@ -201,23 +201,23 @@ const ScheduleScreen = () => {
     return (
         <View style={{flex: 1}}>
             <View style={styles.shiftButtonView}>
-                <Pressable style={(selectedButton === 'My Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
-                    setSelectedButton('My Shifts');
-                    generateItems('My Shifts');
+                <Pressable style={(selectedButton === 'My' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
+                    setSelectedButton('My');
+                    generateItems('My');
                 }}>
-                    <Text style={(selectedButton === 'My Shifts' ? styles.selectedText : styles.text)}>My</Text>
+                    <Text style={(selectedButton === 'My' ? styles.selectedText : styles.text)}>My</Text>
                 </Pressable>
-                <Pressable style={(selectedButton === 'All Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
-                    setSelectedButton('All Shifts');
-                    generateItems('All Shifts');
+                <Pressable style={(selectedButton === 'All' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
+                    setSelectedButton('All');
+                    generateItems('All');
                 }}>
-                    <Text style={(selectedButton === 'All Shifts' ? styles.selectedText : styles.text)}>All</Text>
+                    <Text style={(selectedButton === 'All' ? styles.selectedText : styles.text)}>All</Text>
                 </Pressable>
-                <Pressable style={(selectedButton === 'Open Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
-                    setSelectedButton('Open Shifts');
-                    generateItems('Open Shifts');
+                <Pressable style={(selectedButton === 'Open' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
+                    setSelectedButton('Open');
+                    generateItems('Open');
                 }}>
-                    <Text style={(selectedButton === 'Open Shifts' ? styles.selectedText : styles.text)}>Open</Text>
+                    <Text style={(selectedButton === 'Open' ? styles.selectedText : styles.text)}>Open</Text>
                 </Pressable>
             </View>
             <Agenda
@@ -227,7 +227,7 @@ const ScheduleScreen = () => {
                 showClosingKnob={true}
                 markedDates={markedItems}
                 onRefresh={getData}
-                onCalendarToggled={getShifts}
+                onCalendarToggled={getSchedules}
                 style={styles}
                 theme={{
                     agendaKnobColor: '#302f90',
