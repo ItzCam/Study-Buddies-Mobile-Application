@@ -53,7 +53,7 @@ function VolunteerTabs() {
 function ProfileStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name ="Profile Screen" component={ProfileScreen}/>
+            <Stack.Screen name ="Profile Screen" component={ProfileScreen} options={{headerShown: false}}/>
             <Stack.Screen name ="Edit Profile" component={EditProfileScreen}/>
         </Stack.Navigator>
     );
@@ -72,7 +72,7 @@ function App() {
                 <Stack.Screen name="Forgot Password" component={ForgotPasswordScreen}/>
                 <Stack.Screen name="SM Dashboard" component={SMDashboardTabs} options={{headerShown: false}}/>
                 <Stack.Screen name="Volunteer Dashboard" component={VolunteerTabs} options={{headerShown: false}}/>
-                <Stack.Screen name="Home" component={HomeScreen}/>
+                <Stack.Screen name="Home" component={HomeScreen}/>  
             </Stack.Navigator>
 
             {/*<StatusBar style="auto"/>*/}
