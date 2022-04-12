@@ -6,17 +6,18 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import CalculatorScreen from './screens/CalculatorScreen';
 import TitleScreen from './components/TitleComponents/TitleScreen';
 import LoginScreen from "./components/TitleComponents/LoginScreen";
 import SignUpScreen from "./components/TitleComponents/SignUpScreen";
 import CreateProfileScreen from "./components/TitleComponents/CreateProfileScreen";
 import ForgotPasswordScreen from './components/TitleComponents/ForgotPasswordScreen'
 import ScheduleScreen from "./components/ScheduleScreen";
-import FriendsListScreen from "./components/SMDashboardComponenents/FriendsListScreen";
+import VolunteersScreen from "./components/SMDashboardComponenents/VolunteersScreen";
 import CreateMeetingScreen from "./components/SMDashboardComponenents/CreateMeetingScreen";
 import ProfileScreen from "./components/SMDashboardComponenents/ProfileScreen";
 import EditProfileScreen from './components/SMDashboardComponenents/EditProfileScreen';
-import CalculatorScreen from "./components/SMDashboardComponenents/CalculatorScreen";
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +28,7 @@ function SMDashboardTabs() {
                 <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Create Meeting" component={CreateMeetingScreen} options={{ tabBarIcon: () => (
                     <FontAwesome name="pencil" color="#333333" size={25}/>),}}/>
-            <Tab.Screen name="Buddy List" component={FriendsListScreen} options={{ tabBarIcon: () => (
+            <Tab.Screen name="Buddy List" component={VolunteersScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="users" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false, tabBarIcon: () => (
                 <FontAwesome name="user" color="#333333" size={25}/>),}}/>
@@ -35,12 +36,12 @@ function SMDashboardTabs() {
     );
 }
 
-function FriendsTabs() {
+function VolunteerTabs() {
     return (
         <Tab.Navigator tabBarOptions={{activeTintColor: '#302f90', labelStyle: {fontSize: 11, fontWeight: 'bold'}}}>
             <Tab.Screen name="Schedule" component={ScheduleScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
-            <Tab.Screen name="Friends List" component={FriendsListScreen} options={{ tabBarIcon: () => (
+            <Tab.Screen name="Volunteers" component={VolunteersScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="users" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false, tabBarIcon: () => (
                 <FontAwesome name="user" color="#333333" size={25}/>),}}/>
@@ -51,9 +52,9 @@ function FriendsTabs() {
 function ProfileStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name ="Profile " component={ProfileScreen}/>
+            <Stack.Screen name ="Profile Screen" component={ProfileScreen}/>
             <Stack.Screen name ="Edit Profile" component={EditProfileScreen}/>
-            <Stack.Screen name ="Calculator" component={CalculatorScreen}/>
+            <Stack.Screen name = "Calculator" component={CalculatorScreen}/>
         </Stack.Navigator>
     );
 }
@@ -70,7 +71,7 @@ function App() {
                 <Stack.Screen name="Login" component={LoginScreen}/>
                 <Stack.Screen name="Forgot Password" component={ForgotPasswordScreen}/>
                 <Stack.Screen name="SM Dashboard" component={SMDashboardTabs} options={{headerShown: false}}/>
-                <Stack.Screen name="Friend Dashboard" component={FriendsTabs} options={{headerShown: false}}/>
+                <Stack.Screen name="Volunteer Dashboard" component={VolunteerTabs} options={{headerShown: false}}/>
             </Stack.Navigator>
 
             {/*<StatusBar style="auto"/>*/}
