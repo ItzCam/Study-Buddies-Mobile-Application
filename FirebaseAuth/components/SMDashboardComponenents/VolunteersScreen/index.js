@@ -5,7 +5,7 @@ import { Modal } from "react-native-paper";
 import StyledButton from "../../TitleComponents/StyledButton";
 import {db} from "../../../db/firestore";
 
-const FriendsListScreen = () => {
+const VolunteersScreen = () => {
     const [userList, setUserList] = useState([]);
     const [show, setShow] = useState(false);
 
@@ -65,4 +65,4 @@ const FriendsListScreen = () => {
     );
 }
 
-export default FriendsListScreen;
+export default VolunteersScreen;
