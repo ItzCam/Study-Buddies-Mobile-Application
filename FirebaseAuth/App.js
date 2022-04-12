@@ -6,19 +6,27 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import MainMenu from './screens/MainMenu';
+import Chat from './screens/ChatScreen';
+import Video from './screens/Video';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [props, setProps] = useState(initialState);
   return (
+    <>
+    <AppContext.Provider value={{props, setProps}}>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Menu" component={MainMenu} />
         <Stack.Screen name="Chat" component={ChatScreen} />
+        <Stack.Screen name="Video" component={Video} />
       </Stack.Navigator>
     </NavigationContainer>
+    </AppContext.Provider>
+    </>
   );
 }
 
