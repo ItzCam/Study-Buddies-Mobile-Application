@@ -1,5 +1,3 @@
-const ResrcCenterScreen = () => {
-
-}
+const ResrcCenterScreen = () => {}
 
 export default ResrcCenterScreen;

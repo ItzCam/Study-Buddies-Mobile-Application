@@ -33,6 +33,8 @@ function SMDashboardTabs() {
                 <FontAwesome name="users" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false, tabBarIcon: () => (
                 <FontAwesome name="user" color="#333333" size={25}/>),}}/>
+            <Tab.Screen name="Resources" component={ResrcCenterScreen} options={{headerShown: false, tabBarIcon: () => (
+                <FontAwesome name="ellipsis-h" color="#333333" size={25}/>),}}/>
         </Tab.Navigator>
     );
 }
