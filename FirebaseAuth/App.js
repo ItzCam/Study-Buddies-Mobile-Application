@@ -17,7 +17,7 @@ import VolunteersScreen from "./components/SMDashboardComponenents/VolunteersScr
 import CreateMeetingScreen from "./components/SMDashboardComponenents/CreateMeetingScreen";
 import ProfileScreen from "./components/SMDashboardComponenents/ProfileScreen";
 import EditProfileScreen from './components/SMDashboardComponenents/EditProfileScreen';
-import HomeScreen from './components/HomeScreen';
+import ResrcCenterScreen from './components/ResrcCenterScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -71,8 +71,7 @@ function App() {
                 <Stack.Screen name="Login" component={LoginScreen}/>
                 <Stack.Screen name="Forgot Password" component={ForgotPasswordScreen}/>
                 <Stack.Screen name="SM Dashboard" component={SMDashboardTabs} options={{headerShown: false}}/>
-                <Stack.Screen name="Volunteer Dashboard" component={VolunteerTabs} options={{headerShown: false}}/>
-                <Stack.Screen name="Home" component={HomeScreen}/>  
+                <Stack.Screen name="Volunteer Dashboard" component={VolunteerTabs} options={{headerShown: false}}/>  
             </Stack.Navigator>
 
             {/*<StatusBar style="auto"/>*/}
