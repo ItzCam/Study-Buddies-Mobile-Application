@@ -61,6 +61,15 @@ function ProfileStack() {
     );
 }
 
+// stack for all the extra features within the resources screen
+function ResourcesStack() {
+    return (
+        <Stack.Navigator>
+            
+        </Stack.Navigator>
+    );
+}
+
 
 function App() {
     LogBox.ignoreAllLogs();
