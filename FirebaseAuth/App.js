@@ -33,7 +33,7 @@ function SMDashboardTabs() {
                 <FontAwesome name="users" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false, tabBarIcon: () => (
                 <FontAwesome name="user" color="#333333" size={25}/>),}}/>
-            <Tab.Screen name="Resources" component={ResrcCenterScreen} options={{headerShown: false, tabBarIcon: () => (
+            <Tab.Screen name="Resources" component={ResourcesStack} options={{headerShown: false, tabBarIcon: () => (
                 <FontAwesome name="ellipsis-h" color="#333333" size={25}/>),}}/>
         </Tab.Navigator>
     );
@@ -62,10 +62,11 @@ function ProfileStack() {
 }
 
 // stack for all the extra features within the resources screen
+// fill stack with screens to ensure navigation first
 function ResourcesStack() {
     return (
         <Stack.Navigator>
-            
+
         </Stack.Navigator>
     );
 }
