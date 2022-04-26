@@ -1,23 +1,18 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet, StatusBar } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      marginVertical: 20,
+      marginTop: StatusBar.currentHeight || 0,
     },
     item: {
       backgroundColor: '#4D243D',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: 1,
-      margin: 1,
-      height: Dimensions.get('window').width / numColumns, // approximate a square
+      padding: 20,
+      marginVertical: 8,
+      marginHorizontal: 16,
     },
-    itemInvisible: {
-      backgroundColor: 'transparent',
-    },
-    itemText: {
-      color: '#fff',
+    title: {
+      fontSize: 32,
     },
   });
 
