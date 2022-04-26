@@ -65,8 +65,8 @@ function ProfileStack() {
 // fill stack with screens to ensure navigation first
 function ResourcesStack() {
     return (
-        <Stack.Navigator>
-
+        <Stack.Navigator initialRouteName='Resource Center'>
+            <Stack.Screen name="Resource Center" component={ResrcCenterScreen}/>
         </Stack.Navigator>
     );
 }
