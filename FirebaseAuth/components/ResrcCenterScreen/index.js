@@ -5,11 +5,23 @@ import styles from './styles';
 const features = [
   { 
     id: '1234',
-    title: 'First Item',
+    title: 'Friend Finder',
   },
   { 
     id: '2567',
-    title: 'Second Item',
+    title: 'Chat',
+  },
+  { 
+    id: '5555',
+    title: 'Grade Calc',
+  },
+  { 
+    id: '6666',
+    title: 'GPA Calc',
+  },
+  { 
+    id: '7777',
+    title: 'Cloud',
   },
 ];
 
@@ -30,10 +42,10 @@ const ResrcCenterScreen = () => {
         data={features}
         renderItem={renderItem}
         keyExtractor={item => item.id}
+        numColumns={'2'}
       />
     </SafeAreaView>
-  );   
-//  return(null); // works fine when its null
+  );
 }
 
 export default ResrcCenterScreen;

@@ -6,13 +6,15 @@ const styles = StyleSheet.create({
       marginTop: StatusBar.currentHeight || 0,
     },
     item: {
-      backgroundColor: '#4D243D',
+      backgroundColor: '#FFFF',
       padding: 20,
       marginVertical: 8,
-      marginHorizontal: 16,
+      marginHorizontal: 8,
+      height: 160,
+      width: 175,
     },
     title: {
-      fontSize: 32,
+      fontSize: 27,
     },
   });
 
