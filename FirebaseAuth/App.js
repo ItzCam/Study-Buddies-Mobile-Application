@@ -18,6 +18,11 @@ import CreateMeetingScreen from "./components/SMDashboardComponenents/CreateMeet
 import ProfileScreen from "./components/SMDashboardComponenents/ProfileScreen";
 import EditProfileScreen from './components/SMDashboardComponenents/EditProfileScreen';
 import ResrcCenterScreen from './components/ResrcCenterScreen';
+import FriendFinderScreen from './components/FriendFinderScreen';
+import ChatRoomScreen from './components/ChatRoomScreen';
+import GradeCalcScreen from './components/GradeCalcScreen';
+import GPAcalcScreen from './components/GPAcalcScreen';
+import BuddyCloudScreen from './components/BuddyCloudScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -62,11 +67,15 @@ function ProfileStack() {
 }
 
 // stack for all the extra features within the resources screen
-// fill stack with screens to ensure navigation first
 function ResourcesStack() {
     return (
         <Stack.Navigator initialRouteName='Resource Center'>
             <Stack.Screen name="Resource Center" component={ResrcCenterScreen}/>
+            <Stack.Screen name="Friend Finder" component={FriendFinderScreen}/>
+            <Stack.Screen name="Chat Room" component={ChatRoomScreen}/>
+            <Stack.Screen name="Grade Calc" component={GradeCalcScreen}/>
+            <Stack.Screen name="GPA Calc" component={GPAcalcScreen}/>
+            <Stack.Screen name="Buddy Cloud" component={BuddyCloudScreen}/>
         </Stack.Navigator>
     );
 }
