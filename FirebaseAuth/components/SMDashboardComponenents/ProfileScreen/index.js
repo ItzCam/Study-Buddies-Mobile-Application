@@ -4,7 +4,6 @@ import {Image, View, ScrollView, Pressable, Text, Title} from "react-native";
 import StyledButton from "../../TitleComponents/StyledButton";
 import {auth} from "../../../db/firestore";
 import {db} from '../../../db/firestore';
-import ReactDOM from 'react-dom'
 
 const ProfileScreen = ({navigation}) => {
     const userID = auth.currentUser.uid;
@@ -22,7 +21,7 @@ const ProfileScreen = ({navigation}) => {
         let userRole = userData.data().role;
         setUserRole(userRole);
     }
-    
+
     useEffect(() => {
         getUserData();
     }, []);
@@ -39,7 +38,7 @@ const ProfileScreen = ({navigation}) => {
 
         navigation.replace('Title')
     }
-    
+
     return (
         <ScrollView
             style={styles.container}
@@ -57,22 +56,30 @@ const ProfileScreen = ({navigation}) => {
                 <Text style={styles.title3}>Major: {userRole}</Text>
 
             </View>
+
             <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
-                    text={'Edit Profile '}
+                    text={'Edit Profile Screen'}
                     onPress={() => navigation.navigate('Edit Profile')}
+                />
+                <StyledButton
+                    style={styles.button}
+                    text={'Calculator'}
+                    onPress={() => navigation.navigate('Calculator')}
                 />
                  <StyledButton
                     style={styles.button}
-                    text={'Calculator '}
-                    onPress={() => navigation.navigate('Calculator')}
+                    text={'To Do List'}
+                    onPress={() => navigation.navigate('To Do List')}
+                />
+                 <StyledButton
+                    style={styles.button}
+                    text={'GPA Calculator'}
+                    onPress={() => navigation.navigate('GPA Calculator')}
                 />
                 <Pressable onPress={logout}>
-                    <StyledButton
-                        style={styles.button}
-                        text={'Log out'}
-                    />
+                    <Text style={styles.footer}>Log off</Text>
                 </Pressable>
             </View>
         </ScrollView>
