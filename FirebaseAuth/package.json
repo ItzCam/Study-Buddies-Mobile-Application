@@ -8,9 +8,11 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo/ngrok": "^4.1.0",
     "@react-native-firebase/firestore": "^14.8.1",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+    "@react-navigation/stack": "^6.2.1",
     "expo": "~43.0.2",
     "expo-status-bar": "~1.1.0",
     "firebase": "^8.2.3",
@@ -20,6 +22,7 @@
     "react-native-paper": "^4.12.1",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.8.0",
+    "react-native-twilio-video-webrtc": "^2.1.0",
     "react-native-web": "0.17.1"
   },
   "devDependencies": {

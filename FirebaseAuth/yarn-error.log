@@ -1,0 +1,66 @@
+Arguments: 
+  /snap/node/6198/bin/node /snap/node/6198/bin/yarn.js global dir
+
+PATH: 
+  /home/marv/Desktop/Study-Buddies-Mobile-Application/FirebaseAuth/node_modules/.bin:/home/marv/Desktop/Study-Buddies-Mobile-Application/node_modules/.bin:/home/marv/Desktop/node_modules/.bin:/home/marv/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/snap/node/6198/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/marv/Library/Android/sdk/emulator:/home/marv/Library/Android/sdk/platform-tools:/home/marv/Library/Android/sdk/emulator:/home/marv/Library/Android/sdk/platform-tools
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  16.15.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: EACCES: permission denied, write
+      at writeSync (node:fs:888:3)
+      at SyncWriteStream._write (node:internal/fs/sync_write_stream:25:3)
+      at writeOrBuffer (node:internal/streams/writable:389:12)
+      at _write (node:internal/streams/writable:330:10)
+      at SyncWriteStream.Writable.write (node:internal/streams/writable:334:10)
+      at ConsoleReporter._log (/snap/node/6198/lib/cli.js:92826:17)
+      at ConsoleReporter.log (/snap/node/6198/lib/cli.js:92814:10)
+      at dir (/snap/node/6198/lib/cli.js:36299:14)
+      at Object.<anonymous> (/snap/node/6198/lib/cli.js:25983:25)
+      at Generator.next (<anonymous>)
+
+npm manifest: 
+  {
+    "main": "node_modules/expo/AppEntry.js",
+    "scripts": {
+      "start": "expo start",
+      "android": "expo start --android",
+      "ios": "expo start --ios",
+      "web": "expo start --web",
+      "eject": "expo eject"
+    },
+    "dependencies": {
+      "@react-native-firebase/firestore": "^14.8.1",
+      "@react-navigation/native": "^6.0.6",
+      "@react-navigation/native-stack": "^6.2.5",
+      "@react-navigation/stack": "^6.2.1",
+      "expo": "~43.0.2",
+      "expo-status-bar": "~1.1.0",
+      "firebase": "^8.2.3",
+      "react": "17.0.1",
+      "react-dom": "17.0.1",
+      "react-native": "0.64.3",
+      "react-native-paper": "^4.12.1",
+      "react-native-safe-area-context": "3.3.2",
+      "react-native-screens": "~3.8.0",
+      "react-native-twilio-video-webrtc": "^2.1.0",
+      "react-native-web": "0.17.1"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.12.9"
+    },
+    "private": true
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
