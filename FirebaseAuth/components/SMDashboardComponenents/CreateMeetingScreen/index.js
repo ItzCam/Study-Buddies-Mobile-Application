@@ -181,8 +181,8 @@ const CreateMeetingScreen = ({navigation}) => {
                         placeholder={{label: 'Select a major for your meeting...'}}
                         items={[
                             {label: 'Computer Science', value: 'Computer Science'},
-                            {label: 'Friendly Visitor', value: 'Friendly Visitor'},
-                            {label: 'Driver & Friendly Visitor', value: 'Both'},
+                            {label: 'Computer Engineering', value: 'Computer Engineering'},
+                            {label: 'English', value: 'English'},
                         ]}
                     />
                 </View>
