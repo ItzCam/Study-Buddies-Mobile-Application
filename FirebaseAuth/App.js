@@ -6,10 +6,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import CalculatorScreen from './screens/CalculatorScreen';
+import ToDoListScreen from './components/SMDashboardComponenents/ToDoListScreen';
 import TitleScreen from './components/TitleComponents/TitleScreen';
 import LoginScreen from "./components/TitleComponents/LoginScreen";
 import SignUpScreen from "./components/TitleComponents/SignUpScreen";
+import GPACalculatorScreen from './components/SMDashboardComponenents/GPACalculatorScreen';
 import CreateProfileScreen from "./components/TitleComponents/CreateProfileScreen";
 import ForgotPasswordScreen from './components/TitleComponents/ForgotPasswordScreen'
 import ScheduleScreen from "./components/ScheduleScreen";
@@ -62,6 +64,9 @@ function ProfileStack() {
         <Stack.Navigator>
             <Stack.Screen name ="Profile Screen" component={ProfileScreen} options={{headerShown: false}}/>
             <Stack.Screen name ="Edit Profile" component={EditProfileScreen}/>
+            <Stack.Screen name = "Calculator" component={CalculatorScreen}/>
+            <Stack.Screen name = "To Do List" component={ToDoListScreen}/>
+            <Stack.Screen name = "GPA Calculator" component={GPACalculatorScreen}/>
         </Stack.Navigator>
     );
 }

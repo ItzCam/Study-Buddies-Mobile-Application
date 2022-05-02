@@ -63,6 +63,22 @@ const ProfileScreen = ({navigation}) => {
                     text={'Edit Profile Screen'}
                     onPress={() => navigation.navigate('Edit Profile')}
                 />
+                <StyledButton
+                    style={styles.button}
+                    text={'Calculator'}
+                    onPress={() => navigation.navigate('Calculator')}
+                />
+                 <StyledButton
+                    style={styles.button}
+                    text={'To Do List'}
+                    onPress={() => navigation.navigate('To Do List')}
+                />
+                 <StyledButton
+                    style={styles.button}
+                    text={'GPA Calculator'}
+                    onPress={() => navigation.navigate('GPA Calculator')}
+                />
+                
                 <Pressable onPress={logout}>
                     <Text style={styles.footer}>Log off</Text>
                 </Pressable>
