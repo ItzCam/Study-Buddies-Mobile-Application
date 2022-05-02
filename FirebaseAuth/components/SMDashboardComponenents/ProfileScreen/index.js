@@ -68,6 +68,7 @@ const ProfileScreen = ({navigation}) => {
                     text={'Calculator '}
                     onPress={() => navigation.navigate('Calculator')}
                 />
+                
                 <Pressable onPress={logout}>
                     <StyledButton
                         style={styles.button}

@@ -55,6 +55,7 @@ function ProfileStack() {
             <Stack.Screen name ="Profile Screen" component={ProfileScreen}/>
             <Stack.Screen name ="Edit Profile" component={EditProfileScreen}/>
             <Stack.Screen name = "Calculator" component={CalculatorScreen}/>
+            <Stack.Screen name = "Reminder Task List" component={ReminderTaskScreen}/>
         </Stack.Navigator>
     );
 }
