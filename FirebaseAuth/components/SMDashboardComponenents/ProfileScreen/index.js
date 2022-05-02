@@ -78,6 +78,7 @@ const ProfileScreen = ({navigation}) => {
                     text={'GPA Calculator'}
                     onPress={() => navigation.navigate('GPA Calculator')}
                 />
+                
                 <Pressable onPress={logout}>
                     <Text style={styles.footer}>Log off</Text>
                 </Pressable>
