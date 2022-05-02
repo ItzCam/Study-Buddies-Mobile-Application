@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, FlatList, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView, FlatList, Text, TouchableOpacity, Alert } from 'react-native';
 import styles from './styles';
 
 const features = [
@@ -22,6 +22,10 @@ const features = [
   { 
     id: '7777',
     title: 'Cloud',
+  },
+  {
+    id: '8888',
+    title: 'Be My Buddy (demo)',
   },
 ];
 
@@ -58,8 +62,12 @@ const ResrcCenterScreen = ({ navigation }) => {
     navigation.navigate('GPA Calc')
   } else if(selectedId === '7777'){
     navigation.navigate('Buddy Cloud')
+  } else if(selectedId === '8888'){
+    Alert.alert('You have a new friend request from User: Alpha Notes 331');
   }
   
+  // note: bug still exists when wanting to access same resource. Ex: Resrc -> Friend Finder -> Resrc -> Friend Finder cannot be reaccessed. Possible selectedId issues and different intermediate resrc works fine
+
   return(
     <SafeAreaView style={styles.container}>
       <FlatList
