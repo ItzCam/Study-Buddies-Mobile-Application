@@ -22,8 +22,6 @@ import EditProfileScreen from './components/SMDashboardComponenents/EditProfileS
 import ResrcCenterScreen from './components/ResrcCenterScreen';
 import FriendFinderScreen from './components/FriendFinderScreen';
 import ChatRoomScreen from './components/ChatRoomScreen';
-import GradeCalcScreen from './components/GradeCalcScreen';
-import GPAcalcScreen from './components/GPAcalcScreen';
 import BuddyCloudScreen from './components/BuddyCloudScreen';
 
 const Stack = createNativeStackNavigator();
