@@ -78,8 +78,6 @@ function ResourcesStack() {
             <Stack.Screen name="Resource Center" component={ResrcCenterScreen}/>
             <Stack.Screen name="Friend Finder" component={FriendFinderScreen}/>
             <Stack.Screen name="Chat Room" component={ChatRoomScreen}/>
-            <Stack.Screen name="Grade Calc" component={GradeCalcScreen}/>
-            <Stack.Screen name="GPA Calc" component={GPAcalcScreen}/>
             <Stack.Screen name="Buddy Cloud" component={BuddyCloudScreen}/>
         </Stack.Navigator>
     );

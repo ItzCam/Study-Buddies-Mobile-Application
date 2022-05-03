@@ -10,8 +10,7 @@ const styles = StyleSheet.create({
       padding: 20,
       marginVertical: 8,
       marginHorizontal: 8,
-      height: 160,
-      width: 170,
+      height: 100,
     },
     title: {
       fontSize: 27,
